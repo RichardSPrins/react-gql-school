@@ -31,10 +31,6 @@ const actions = {
 
 const NewActionModal = () => {
   const [actionState, setActionState] = React.useState(actions.base)
-  const [deptState, setDeptState] = React.useState({
-    name: "",
-    description: "" 
-  })
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const resetState = (cbs) => {

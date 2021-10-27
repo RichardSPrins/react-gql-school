@@ -3,11 +3,7 @@ import {
   Heading,
   Container,
   Text,
-  VStack,
-  Flex,
   Box,
-  SimpleGrid,
-  GridItem,
   Table,
   Thead,
   Tbody,
@@ -24,7 +20,6 @@ import {GET_DEPARTMENTS} from '../graphql/queries.js'
 const DepartmentsPage = () => {
   const {data, loading, error} = useQuery(GET_DEPARTMENTS);
 
-  console.log(data)
   return (
     <>
       <Container mt="6" maxW="8xl">
