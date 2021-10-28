@@ -9,6 +9,15 @@ export const REGISTER_STUDENT = gql`
   }
 `
 
+export const ENROLL_STUDENT = gql`
+  mutation EnrollStudentMutation($enrollStudentId: ID!) {
+    enrollStudent(id: $enrollStudentId) {
+      id
+      fullName
+    }
+  }
+`
+
 export const CREATE_DEPARTMENT = gql`
   mutation CreateDept($name: String!, $description: String) {
     createDept(name: $name, description: $description) {

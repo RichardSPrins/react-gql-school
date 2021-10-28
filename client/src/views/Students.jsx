@@ -11,11 +11,46 @@ import {
   Tr,
   Th,
   Td,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  MenuItemOption,
+  MenuGroup,
+  MenuOptionGroup,
+  MenuIcon,
+  MenuCommand,
+  MenuDivider,
+  Button
 } from '@chakra-ui/react'
+
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
-  useQuery
+  useQuery,
+  useMutation
 } from '@apollo/client'
 import { GET_STUDENTS } from '../graphql/queries.js'
+import { ENROLL_STUDENT } from '../graphql/mutations.js'
+
+const ActionsButton = ({ studentId }) => {
+  const [enrollStudent, { data, loading, error }] = useMutation(ENROLL_STUDENT, {
+    refetchQueries: [
+      GET_STUDENTS,
+      'Students'
+    ]
+  })
+  return (
+    <Menu>
+      <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+        Actions
+      </MenuButton>
+      <MenuList>
+        <MenuItem onClick={() => enrollStudent({ variables: { enrollStudentId: studentId } })}>Enroll Student</MenuItem>
+        <MenuItem>Delete</MenuItem>
+      </MenuList>
+    </Menu>
+  )
+}
 
 
 const StudentsPage = () => {
@@ -43,6 +78,7 @@ const StudentsPage = () => {
                   <Th>Email</Th>
                   <Th>Enrolled</Th>
                   <Th>Department</Th>
+                  <Th></Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -54,6 +90,7 @@ const StudentsPage = () => {
                       <Td>{el.email}</Td>
                       <Td>{el.enrolled ? "Yes" : "No"}</Td>
                       <Td>{el.department?.name}</Td>
+                      <Td><ActionsButton studentId={el.id} /></Td>
                     </Tr>
                   )
                 })}

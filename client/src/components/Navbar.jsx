@@ -25,9 +25,9 @@ import NewActionModal from './NewActionModal';
 const Links = [
   { name: 'Home', path: '/' },
   { name: 'Departments', path: '/departments' },
+  { name: 'Courses', path: '/courses' },
   { name: 'Teachers', path: '/teachers' },
   { name: 'Students', path: '/students' },
-  { name: 'Courses', path: '/courses' }
 ];
 
 const NavLink = ({ children, path }) => (
