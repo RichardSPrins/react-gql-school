@@ -20,6 +20,17 @@ const Mutation = {
       data: { enrolled: true }
     })
   },
+  revokeStudent: (_parent, args) => {
+    return prisma.student.update({
+      where: { id: Number(args.id) },
+      data: { enrolled: false }
+    })
+  },
+  deleteStudent: (_parent, args) => {
+    return prisma.student.delete({
+      where: { id: Number(args.id) }
+    })
+  },
   createTeacher: (_parent, args) => {
     return prisma.teacher.create({
       data: {

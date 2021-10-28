@@ -10,10 +10,26 @@ export const REGISTER_STUDENT = gql`
 `
 
 export const ENROLL_STUDENT = gql`
-  mutation EnrollStudentMutation($enrollStudentId: ID!) {
+  mutation EnrollStudent($enrollStudentId: ID!) {
     enrollStudent(id: $enrollStudentId) {
       id
       fullName
+    }
+  }
+`
+
+export const REVOKE_STUDENT = gql`
+  mutation RevokeStudent($revokeStudentId: ID!) {
+    revokeStudent(id: $revokeStudentId) {
+      id
+    }
+  }
+`
+
+export const DELETE_STUDENT = gql`
+  mutation DeleteStudent($deleteStudentId: ID!) {
+    deleteStudent(id: $deleteStudentId) {
+      id
     }
   }
 `

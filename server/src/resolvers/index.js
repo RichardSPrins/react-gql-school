@@ -10,7 +10,6 @@ const Student = {
   fullName: (parent) => parent.fullName,
   enrolled: (parent) => parent.enrolled,
   department: (parent, _args) => {
-    console.log(parent)
     return prisma.department.findFirst({
       where: { id: parent.deptId },
     });

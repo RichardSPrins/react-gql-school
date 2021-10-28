@@ -1,6 +1,6 @@
 const { gql } = require("apollo-server");
 
-// Creating GraphQL schema for data types and mutations for modifying data
+// Creating GraphQL schema for data types for querying and mutations for modifying data
 const typeDefs = gql`
   type Student {
     id: ID!
@@ -47,20 +47,23 @@ const typeDefs = gql`
   input CreateTeacherInput {
     email: String!
     fullName: String!
-    courses: [CreateCourseWithoutTeacherInput!]
+    courses: [CreateCourseWithoutTeacherInput]
   }
 
-    input CreateCourseWithoutTeacherInput {
+  input CreateCourseWithoutTeacherInput {
     code: String!
     title: String!
     description: String
+    deptId: Int
   }
 
   type Mutation {
     registerStudent(email: String!, fullName: String!, deptId: Int!): Student!
+    revokeStudent(id: ID!): Student
     enrollStudent(id: ID!): Student
+    deleteStudent(id: ID!): Student
     createTeacher(data: CreateTeacherInput!): Teacher!
-    createCourse(code: String!, title: String!, teacherEmail: String): Course!
+    createCourse(code: String!, title: String!, teacherEmail: String, deptId: Int): Course!
     createDept(name: String!, description: String): Department!
   }
 

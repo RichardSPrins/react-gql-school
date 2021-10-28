@@ -19,18 +19,18 @@ export const GET_DEPARTMENTS = gql`
   }
 `
 export const GET_STUDENTS = gql`
-query Students {
-  students {
-    email
-    fullName
-    department {
+  query Students {
+    students {
+      email
+      fullName
+      department {
+        id
+        name
+      }
+      enrolled  
       id
-      name
     }
-    enrolled  
-    id
   }
-}
 `
 export const GET_TEACHERS = gql`
   query Teachers {
@@ -45,8 +45,12 @@ export const GET_COURSES = gql`
   query Courses {
     courses {
       id
-      name
-      description
+      code
+      title
+      department {
+        id
+        name
+      }
     }
   }
 `

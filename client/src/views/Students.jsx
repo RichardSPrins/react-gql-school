@@ -30,10 +30,22 @@ import {
   useMutation
 } from '@apollo/client'
 import { GET_STUDENTS } from '../graphql/queries.js'
-import { ENROLL_STUDENT } from '../graphql/mutations.js'
+import { DELETE_STUDENT, ENROLL_STUDENT, REVOKE_STUDENT } from '../graphql/mutations.js'
 
 const ActionsButton = ({ studentId }) => {
-  const [enrollStudent, { data, loading, error }] = useMutation(ENROLL_STUDENT, {
+  const [enrollStudent, { enrollData, enrollLoading, enrollError }] = useMutation(ENROLL_STUDENT, {
+    refetchQueries: [
+      GET_STUDENTS,
+      'Students'
+    ]
+  })
+  const [revokeStudent, { revokeData, revokeLoading, revokeError }] = useMutation(REVOKE_STUDENT, {
+    refetchQueries: [
+      GET_STUDENTS,
+      'Students'
+    ]
+  })
+  const [deleteStudent, { deleteData, deleteLoading, deleteError }] = useMutation(DELETE_STUDENT, {
     refetchQueries: [
       GET_STUDENTS,
       'Students'
@@ -45,8 +57,9 @@ const ActionsButton = ({ studentId }) => {
         Actions
       </MenuButton>
       <MenuList>
-        <MenuItem onClick={() => enrollStudent({ variables: { enrollStudentId: studentId } })}>Enroll Student</MenuItem>
-        <MenuItem>Delete</MenuItem>
+        <MenuItem color="green" onClick={() => enrollStudent({ variables: { enrollStudentId: studentId } })}>Enroll</MenuItem>
+        <MenuItem color="orange" onClick={() => revokeStudent({ variables: { revokeStudentId: studentId } })}>Revoke</MenuItem>
+        <MenuItem color="red" onClick={() => deleteStudent({ variables: { deleteStudentId: studentId } })}>Delete</MenuItem>
       </MenuList>
     </Menu>
   )
@@ -55,8 +68,6 @@ const ActionsButton = ({ studentId }) => {
 
 const StudentsPage = () => {
   const { data, loading, error } = useQuery(GET_STUDENTS);
-
-  console.log(data)
 
   return (
     <>
