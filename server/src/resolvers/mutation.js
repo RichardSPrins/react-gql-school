@@ -3,11 +3,12 @@ const { prisma } = require("../../prisma/db.js");
 // Create Mutation functions to relay data mutations to database
 const Mutation = {
   registerStudent: (_parent, args) => {
+    console.log(args)
     return prisma.student.create({
       data: {
         email: args.email,
         fullName: args.fullName,
-        dept: args.deptId && {
+        department: args.deptId && {
           connect: { id: args.deptId },
         }
       }
@@ -38,6 +39,9 @@ const Mutation = {
         teacher: args.teacherEmail && {
           connect: { email: args.teacherEmail },
         },
+        department: args.deptId && {
+          connect: { id: args.deptId }
+        }
       },
     })
   },

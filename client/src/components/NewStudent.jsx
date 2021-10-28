@@ -14,7 +14,7 @@ import {
   useQuery,
   useMutation
 } from '@apollo/client'
-import { GET_DEPARTMENTS } from '../graphql/queries.js'
+import { GET_DEPARTMENTS, GET_STUDENTS } from '../graphql/queries.js'
 import { REGISTER_STUDENT } from '../graphql/mutations.js'
 
 
@@ -28,7 +28,9 @@ const NewStudent = () => {
   const [registerStudent, { data: newStudentMutationData, loading: newStudentLoading, error: newStudentError }] = useMutation(REGISTER_STUDENT, {
     refetchQueries: [
       GET_DEPARTMENTS,
-      'Departments'
+      'Departments',
+      GET_STUDENTS,
+      "Students"
     ]
   })
 

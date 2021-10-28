@@ -6,7 +6,7 @@ const typeDefs = gql`
     id: ID!
     email: String!
     fullName: String!
-    dept: Department!
+    department: Department!
     enrolled: Boolean
     updatedAt: String
     createdAt: String
@@ -39,7 +39,7 @@ const typeDefs = gql`
     title: String!
     description: String
     teacher: Teacher
-    dept: Department
+    department: Department
     updatedAt: String
     createdAt: String
   }

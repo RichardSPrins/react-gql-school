@@ -11,14 +11,14 @@ datasource db {
 }
 
 model Student {
-  id        Int         @id @default(autoincrement())
-  email     String      @unique @db.VarChar(255)
-  fullName  String?     @db.VarChar(255)
-  enrolled  Boolean     @default(false)
-  dept      Department? @relation(fields: [deptId], references: [id])
-  deptId    Int?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id         Int         @id @default(autoincrement())
+  email      String      @unique @db.VarChar(255)
+  fullName   String?     @db.VarChar(255)
+  enrolled   Boolean     @default(false)
+  department Department? @relation(fields: [deptId], references: [id])
+  deptId     Int?
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 
   @@map(name: "student")
 }
@@ -29,7 +29,6 @@ model Department {
   description String?   @db.VarChar(500)
   students    Student[]
   courses     Course[]
-  // teachers    Teacher[]
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
@@ -37,15 +36,13 @@ model Department {
 }
 
 model Teacher {
-  id           Int         @id @default(autoincrement())
-  email        String      @unique @db.VarChar(255)
-  fullName     String?     @db.VarChar(255)
-  courses      Course[]
-  // department   Department?  @relation(fields: [deptId], references: [id])
-  // deptId Int
-  type         TeacherType @default(FULLTIME)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  id        Int         @id @default(autoincrement())
+  email     String      @unique @db.VarChar(255)
+  fullName  String?     @db.VarChar(255)
+  courses   Course[]
+  type      TeacherType @default(FULLTIME)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 
   @@map(name: "teacher")
 }
@@ -57,7 +54,7 @@ model Course {
   description String?     @db.VarChar(500)
   teacher     Teacher?    @relation(fields: [teacherId], references: [id])
   teacherId   Int?
-  dept        Department? @relation(fields: [deptId], references: [id])
+  department  Department? @relation(fields: [deptId], references: [id])
   deptId      Int?
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt

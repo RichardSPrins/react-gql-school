@@ -9,9 +9,10 @@ const Student = {
   email: (parent) => parent.email,
   fullName: (parent) => parent.fullName,
   enrolled: (parent) => parent.enrolled,
-  dept: (parent, _args) => {
+  department: (parent, _args) => {
+    console.log(parent)
     return prisma.department.findFirst({
-      where: { id: parent.dept },
+      where: { id: parent.deptId },
     });
   },
 };
@@ -53,10 +54,10 @@ const Course = {
         where: { id: parent.id },
       }).teacher();
   },
-  dept: (parent, _args) => {
+  department: (parent, _args) => {
     return prisma.course.findUnique({
       where: { id: parent.id },
-    }).dept();
+    }).department();
   },
 };
 

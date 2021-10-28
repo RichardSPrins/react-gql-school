@@ -19,12 +19,18 @@ export const GET_DEPARTMENTS = gql`
   }
 `
 export const GET_STUDENTS = gql`
-  query Students {
-    students {
+query Students {
+  students {
+    email
+    fullName
+    department {
       id
-      fullName
+      name
     }
+    enrolled  
+    id
   }
+}
 `
 export const GET_TEACHERS = gql`
   query Teachers {
